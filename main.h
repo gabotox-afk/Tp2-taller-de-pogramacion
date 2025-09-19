@@ -1,5 +1,16 @@
-typedef struct _DNodo {
+typedef struct _NodoBlock {
   int dato;
-  struct _DNodo *sig;
-  struct _DNodo *ant;
-} DNodo;
+  int id;
+  char mensaje;
+  struct _NodoBlock *sig;
+  struct _NodoBlock *ant;
+} NodoBlock;
+
+typedef struct _BlockFederada
+{
+    int dato;
+    struct _BlockFederada *sig;
+    struct _NodoBlock *primero;
+    struct _NodoBlock *ultimo;
+};
+

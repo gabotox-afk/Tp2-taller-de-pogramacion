@@ -1,6 +1,8 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "generador_primos.h"
+#include "main.h"
+
 
 int main() {
   // Genero y muestro los primeros 100 números primos
