@@ -18,3 +18,11 @@ typedef struct _ABNodo {
   struct _ABNodo *izq, *der;
 } ABNodo;
 
+
+void modif_len(Pila* p, int l){
+    p->len =l;
+    void **nuevosD= realloc ( p->datos, l *sizeof(void *));
+    p->datos= nuevosD;
+    if(p->ultimo >= l)
+        p->ultimo = l-1;
+}
