@@ -13,4 +13,8 @@ typedef struct _BlockFederada
     struct _NodoBlock *primero;
     struct _NodoBlock *ultimo;
 };
+typedef struct _ABNodo {
+  int dato;
+  struct _ABNodo *izq, *der;
+} ABNodo;
 
