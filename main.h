@@ -19,6 +19,17 @@ typedef struct _ABNodo {
 } ABNodo;
 
 
+typedef struct _Pila {
+void **datos;
+int ultimo;
+int len;
+} Pila;
+//typedef struct _Pila{
+//    int len;
+//    int *datos;
+//    int ultimo;
+//}Pila;
+
 void modif_len(Pila* p, int l){
     p->len =l;
     void **nuevosD= realloc ( p->datos, l *sizeof(void *));
