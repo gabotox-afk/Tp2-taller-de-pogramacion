@@ -10,7 +10,11 @@ int cantidad_blocks;
 ABNodo* raiz_validacion;
 }_blockFederada;
 
-void modif_len(_blockFederada* bF, int l);
+void modif_len(_blockFederada* bF, int nueva_capacidad);
+
+_blockFederada* crear_red_federada(int capacidad_inicial);
+
+void liberar_red_federada(_blockFederada* red);
 
 
 

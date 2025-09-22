@@ -16,4 +16,16 @@ typedef struct _BlockChain
 
 }blockChain;
 
+NodoBlock* crear_nodo(char* mensaje, int id_actual, int id_anterior);
+
+void liberar_lista(blockChain* bc);
+
+NodoBlock* buscar_nodo_por_id(blockChain* bc, int id_buscado);
+
+void imprimir_lista(blockChain* bc);
+
+int esta_vacia(blockChain* bc);
+
+
+
 #endif
