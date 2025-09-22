@@ -5,9 +5,9 @@
 
 typedef struct _BlockFederada {
 blockChain *datos;
-int ultimo;
-int len;
-NodoArbol* raiz_validacion;
+int capacidad;
+int cantidad_blocks;
+ABNodo* raiz_validacion;
 }_blockFederada;
 
 void modif_len(_blockFederada* bF, int l);

@@ -1,11 +1,9 @@
 #ifndef ARBOL_VALIDACION_H
 #define ARBOL_VALIDACION_H
 
-typedef struct NodoArbol {
-    int valor;
-    struct NodoArbol* izquierda;
-    struct NodoArbol* derecha;
-} NodoArbol;
-
+typedef struct _ABNodo {
+  int dato;
+  struct _ABNodo *izq, *der;
+} ABNodo;
 
 #endif
