@@ -2,16 +2,15 @@
 #define BLOCKCHAIN_H
 
 typedef struct _NodoBlock {
-  int dato;
-  int id;
-  char mensaje;
+  int id_actual;
+  char *mensaje;
+  int id_anterior;
   struct _NodoBlock *sig;
-  struct _NodoBlock *ant;
 } NodoBlock;
 
 typedef struct _BlockChain
 {
-    int dato;
+    int id_block;
     struct _NodoBlock *primero;
     struct _NodoBlock *ultimo;
 
