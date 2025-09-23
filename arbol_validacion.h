@@ -1,18 +1,17 @@
 #ifndef ARBOL_VALIDACION_H
 #define ARBOL_VALIDACION_H
+  
+typedef struct arbol_v {
+int *datos;
+int ultimo;
+int len;
+} arbol_v;
 
-typedef struct _ABNodo {
-  int dato;
-  struct _ABNodo *izq, *der;
-} _ABNodo;
+void modif_len( arbol_v , int nueva_capacidad);
 
+arbol_v crear_red_federada(int largo_inicial);
 
-_ABNodo* construir_arbol_desde_hojas(int* ids_hojas, int cantidad_hojas);
-
-_ABNodo crear_nodo_arbol(int valor);
-
-void liberar_arbol(_ABNodo* raiz);
-
+void liberar_red_federada(arbol_v* red);
 
 
 #endif
