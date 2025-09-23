@@ -1,6 +1,7 @@
 #ifndef BLOCKCHAIN_H
 #define BLOCKCHAIN_H
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct _NodoBlock {
   int id_actual;
