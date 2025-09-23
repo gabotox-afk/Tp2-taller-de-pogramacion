@@ -1,12 +1,21 @@
 #include "blockchain.h"
 
 
-NodoBlock* crear_nodo(char* m, int id_act, int id_ant){
+NodoBlock* crear_nodo(char* m, int* c, int* p, int id_ant){
     NodoBlock* nuevo = (NodoBlock*) malloc(sizeof (NodoBlock));
-    nuevo ->id_actual= id_act;
-    nuevo -> id_anterior= id_ant;
+    nuevo ->id_actual= p[(*c)];
+    if ((*c)== 0){
+        nuevo -> id_anterior= 0;    
+    }
+    else{
+        nuevo -> id_anterior= p[id_ant];
+    }
+
     nuevo -> mensaje= m;
     nuevo -> sig= NULL;
+
+    (*c)++;
+    return nuevo;
 }
 
 void liberar_lista(blockChain* bc){
@@ -19,6 +28,8 @@ void liberar_lista(blockChain* bc){
     }
     bc -> primero = NULL; 
     bc -> ultimo = NULL;   
+
+    free(bc);
 
 }
 
@@ -33,6 +44,7 @@ NodoBlock* buscar_nodo_por_id(blockChain* bc, int id_buscado){
 }
 
 void imprimir_lista(blockChain* bc){
+
     NodoBlock* impresion = bc -> primero;
     while(impresion){
         printf("\nid actual: %d, mensaje: %s, id anterior: %d\n", impresion -> id_actual, impresion -> mensaje, impresion -> id_anterior);
@@ -45,8 +57,8 @@ int esta_vacia(blockChain* bc){
     return bc -> primero == NULL;
 }
 
-void agregar_bloque(blockChain* bc, NodoBlock* nuevo, int* c){
-    if (bc == NULL || nuevo || NULL){
+void agregar_bloque(blockChain* bc, NodoBlock* nuevo){
+    if (bc == NULL || nuevo == NULL){
         return;
     }
 

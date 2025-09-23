@@ -20,9 +20,9 @@ typedef struct _BlockChain
 
 blockChain* crear_block_chain(int* c);
 
-NodoBlock* crear_nodo(char* m, int id_act, int id_ant);
+NodoBlock* crear_nodo(char* m, int* c, int* p, int id_ant);
 
-void agregar_bloque(blockChain* bc, NodoBlock* nuevo, int* c);
+void agregar_bloque(blockChain* bc, NodoBlock* nuevo);
 
 void liberar_lista(blockChain* bc);
 
