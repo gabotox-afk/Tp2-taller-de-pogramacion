@@ -11,10 +11,10 @@ void expandir_capacidad(_blockFederada* red) {
 }
 
 _blockFederada* crear_red_federada(int largo_inicial){
-    _blockFederada *nuevo = malloc (sizeof(_blockFederada));
-    nuevo->capacidad = largo_inicial;
-    nuevo->datos=malloc (largo_inicial*sizeof(blockChain));
-    nuevo -> cantidad_blocks= 0;
+    _blockFederada *nuevo = (_blockFederada*) malloc(sizeof(_blockFederada));
+    nuevo -> capacidad = largo_inicial;
+    nuevo -> datos = malloc (largo_inicial*sizeof(blockChain));
+    nuevo -> cantidad_blocks = 0;
     return nuevo;
 }
 
