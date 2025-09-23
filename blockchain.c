@@ -36,8 +36,7 @@ void imprimir_lista(blockChain* bc){
     while(impresion){
         printf("\nid actual: %d, mensaje: %s, id anterior: %d\n", impresion -> id_actual, impresion -> mensaje, impresion -> id_anterior);
         impresion = impresion -> sig;    
-    }
-    
+    }   
 
 }
 

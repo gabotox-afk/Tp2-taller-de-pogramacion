@@ -8,3 +8,11 @@ void modif_len(_blockFederada* bF, int nueva_capacidad){
     _blockFederada **nuevosD= realloc ( bF->datos, nueva_capacidad *sizeof(void*));
     bF ->datos= nuevosD;
 }
+
+_blockFederada* crear_red_federada(int capacidad_inicial){
+    
+}
+
+void liberar_red_federada(_blockFederada* red){
+    
+}
