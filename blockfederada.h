@@ -10,7 +10,7 @@ int cantidad_blocks;
 arbol_v* arbol_validacion;
 }_blockFederada;
 
-void modif_len(_blockFederada* bF, int nueva_capacidad);
+void modif_len(_blockFederada* bF);
 
 _blockFederada* crear_red_federada(int largo_inicial);
 

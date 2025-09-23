@@ -7,11 +7,11 @@ int ultimo;
 int len;
 } arbol_v;
 
-void modif_len( arbol_v* , int nueva_capacidad);
+void expandir_capacidad( arbol_v* arbol);
 
-arbol_v crear_red_federada(int largo_inicial);
+arbol_v* crear_arbol_validacion(int largo_inicial);
 
-void liberar_red_federada(arbol_v* red);
+void liberar_arbol_validacion(arbol_v* red);
 
 
 #endif

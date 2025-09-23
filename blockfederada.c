@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void expandir_capacidad(_blockFederada* red) {
+void modif_len(_blockFederada* red) {
 
     int nueva_capacidad = red->capacidad + 1;
     blockChain* nuevos_datos = realloc(red->datos, nueva_capacidad * sizeof(blockChain));

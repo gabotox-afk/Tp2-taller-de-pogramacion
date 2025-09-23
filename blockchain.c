@@ -62,8 +62,12 @@ void agregar_bloque(blockChain* bc, NodoBlock* nuevo, int* c){
 
 blockChain* crear_block_chain(int* c){
     blockChain* nuevo = (blockChain*) malloc(sizeof(blockChain));
-    nuevo -> id_block = c;
+    nuevo -> id_block = (*c);
     nuevo -> primero = NULL;
     nuevo -> ultimo = NULL;
+    (*c)++;
+    printf("aura\n%d\naura",*c);
     return nuevo;
+
+
 }

@@ -22,7 +22,7 @@ blockChain* crear_block_chain(int* c);
 
 NodoBlock* crear_nodo(char* m, int id_act, int id_ant);
 
-void agregar_bloque(blockChain* bc, NodoBlock* nuevo);
+void agregar_bloque(blockChain* bc, NodoBlock* nuevo, int* c);
 
 void liberar_lista(blockChain* bc);
 
