@@ -7,7 +7,6 @@ typedef struct _BlockFederada {
 blockChain *datos;
 int capacidad;
 int cantidad_blocks;
-_ABNodo* raiz_validacion;
 }_blockFederada;
 
 void modif_len(_blockFederada* bF, int nueva_capacidad);

@@ -15,7 +15,6 @@ _blockFederada* crear_red_federada(int largo_inicial){
     nuevo->capacidad = largo_inicial;
     nuevo->datos=malloc (largo_inicial*sizeof(blockChain));
     nuevo -> cantidad_blocks= 0;
-    nuevo -> raiz_validacion = NULL;
     return nuevo;
 }
 
