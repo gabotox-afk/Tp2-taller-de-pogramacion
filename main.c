@@ -23,7 +23,8 @@ int validacion_sub(int vp, int min, int max, _blockFederada bf){
 
 
 int main() {
-    int contador = 0 ;
+    int contadorp = 0 ;
+    int contadorbf = 0;
   // Genero y muestro los primeros 100 números primos
   int *p = primos(100);
   for(int i = 0; i < 100; i++)

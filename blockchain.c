@@ -6,6 +6,7 @@ NodoBlock* crear_nodo(char* m, int id_act, int id_ant){
     nuevo ->id_actual= id_act;
     nuevo -> id_anterior= id_ant;
     nuevo -> mensaje= m;
+    nuevo -> sig= NULL;
 }
 
 void liberar_lista(blockChain* bc){
@@ -42,4 +43,27 @@ void imprimir_lista(blockChain* bc){
 
 int esta_vacia(blockChain* bc){
     return bc -> primero == NULL;
+}
+
+void agregar_bloque(blockChain* bc, NodoBlock* nuevo, int* c){
+    if (bc == NULL || nuevo || NULL){
+        return;
+    }
+
+    if (esta_vacia(bc)){
+        bc -> primero= nuevo;
+        bc ->ultimo = nuevo;
+    }
+    else{
+        bc -> ultimo -> sig = nuevo;
+        bc -> ultimo = nuevo;
+    }
+}
+
+blockChain* crear_block_chain(int* c){
+    blockChain* nuevo = (blockChain*) malloc(sizeof(blockChain));
+    nuevo -> id_block = c;
+    nuevo -> primero = NULL;
+    nuevo -> ultimo = NULL;
+    return nuevo;
 }
