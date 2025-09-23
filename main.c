@@ -3,12 +3,32 @@
 #include "generador_primos.h"
 #include "main.h"
 
+void alta(int id_b , _blockFederada* bf ,char* mensaje){
+  
+}
+
+void actualizacion(_blockFederada* bf, int id_b, int id_n, char* nm){
+  
+}
+
+int validacion(_blockFederada* bf){
+  
+}
+
+int validacion_sub(int vp, int min, int max, _blockFederada bf){
+  
+}
+
+
+
 
 int main() {
+    int contador = 0 ;
   // Genero y muestro los primeros 100 números primos
   int *p = primos(100);
   for(int i = 0; i < 100; i++)
     printf("%d ",p[i]);
+
 
   // Uso los números primos
 
