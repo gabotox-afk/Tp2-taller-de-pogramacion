@@ -9,7 +9,15 @@ NodoBlock* crear_nodo(char* m, int id_act, int id_ant){
 }
 
 void liberar_lista(blockChain* bc){
-
+    NodoBlock* borrar= bc -> primero;
+    while (borrar){
+        NodoBlock* temp = borrar;
+        borrar = borrar -> sig;
+        free(temp -> mensaje);
+        free(temp);
+    }
+    bc -> primero = NULL; 
+    bc -> ultimo = NULL;   
 
 }
 NodoBlock* buscar_nodo_por_id(blockChain* bc, int id_buscado){
