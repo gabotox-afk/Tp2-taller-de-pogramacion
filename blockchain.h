@@ -16,7 +16,7 @@ typedef struct _BlockChain
 
 }blockChain;
 
-NodoBlock* crear_nodo(char* mensaje, int id_actual, int id_anterior);
+NodoBlock* crear_nodo(char* m, int id_act, int id_ant);
 
 void liberar_lista(blockChain* bc);
 
