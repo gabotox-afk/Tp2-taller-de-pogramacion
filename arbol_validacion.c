@@ -23,6 +23,24 @@ arbol_v* crear_arbol_simplificado(int capacidad_inicial) {
     return arbol;
 }
 
+arbol_v* construir_arbol_validacion(int* ids_hojas, int cantidad_hojas) {
+    if (ids_hojas == NULL || cantidad_hojas <= 0) {
+        return NULL;
+    }
+
+    arbol_v* arbol = crear_arbol_validacion(cantidad_hojas);
+    if (arbol == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < cantidad_hojas; i++) {
+        arbol->hojas[i] = ids_hojas[i];
+    }
+    arbol->cantidad_hojas = cantidad_hojas;
+    recalcular_raiz(arbol);
+    return arbol;
+}
+
 
 void liberar_arbol_simplificado(arbol_v* arbol) {
     if (arbol == NULL) return;
