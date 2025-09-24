@@ -48,15 +48,37 @@ void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* co
 
 
 
-void actualizacion(_blockFederada* bc, int id_bc, int id_n, char* nm,  int* c,  int* p){
+void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  int* p){
+
+    blockChain* hola = buscar_blockchain_por_id(bf, id_bc);
+
+    NodoBlock* temp = buscar_nodo_por_id(hola, id_n);
+
+    temp->id_actual = p[(*c)];
+    
+    free(temp->mensaje);
+    temp->mensaje = (char*)malloc(strlen(nm) + 1); 
+    strcpy(temp->mensaje, nm);
+    temp->mensaje = nm;
+
+    (*c)++;
+    temp = temp->sig;
+
+    while(temp){
+      temp->id_actual = p[(*c)];
+      temp-> id_anterior = p [ (*c)-1];
+      temp->mensaje = nm;
+      (*c)++;
+      temp = temp -> sig;
+    }
   
 }
 
-int validacion(_blockFederada* bc){
+int validacion(_blockFederada* bf){
   
 }
 
-int validacion_sub(int vp, int min, int max, _blockFederada bc){
+int validacion_sub(int vp, int min, int max, _blockFederada bf){
   
 }
 
