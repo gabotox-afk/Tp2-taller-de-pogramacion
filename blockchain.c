@@ -1,10 +1,9 @@
 #include "blockchain.h"
 
-
 NodoBlock* crear_nodo(char* m, int* c, int* p, int id_ant){
     NodoBlock* nuevo = (NodoBlock*) malloc(sizeof (NodoBlock));
     nuevo ->id_actual= p[(*c)];
-    if ((*c)== 0){
+    if ((*c)== 0 || id_ant == 0){
         nuevo -> id_anterior= 0;    
     }
     else{

@@ -2,6 +2,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
+
+    blockChain* temp = (&bf ->datos[id_blockchain]);
+    int nuevo_dato = (temp -> ultimo) -> id_actual;
+
+    int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
+
+    int indice_hoja = capacidad_hojas + id_blockchain;
+    arbol->datos[indice_hoja] = nuevo_dato;
+
+
+
+    int indice_actual = indice_hoja / 2;
+
+    while (indice_actual > 0) {
+        calcular_padres(arbol, indice_actual);
+        indice_actual = indice_actual / 2;
+    }
+}
+
+
 void modif_len(_blockFederada* red) {
 
     int nueva_capacidad = red->capacidad + 1;
@@ -15,6 +36,7 @@ _blockFederada* crear_red_federada(int largo_inicial){
     nuevo -> capacidad = largo_inicial;
     nuevo -> datos = malloc (largo_inicial*sizeof(blockChain));
     nuevo -> cantidad_blocks = 0;
+    nuevo -> arbol_validacion = NULL;
     return nuevo;
 }
 

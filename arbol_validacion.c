@@ -1,6 +1,9 @@
+
 #include "arbol_validacion.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+
 
 
 void expandir_capacidad(arbol_v* arbol) {
@@ -85,27 +88,7 @@ arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas) {
 }
 
 
-void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
 
-    blockChain* temp = (&bf ->datos[id_blockchain]);
-    int nuevo_dato = (temp -> ultimo) -> id_actual;
-
-    int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
-
-    int indice_hoja = capacidad_hojas + id_blockchain;
-    arbol->datos[indice_hoja] = nuevo_dato;
-
-
-
-    int indice_actual = indice_hoja / 2;
-
-    while (indice_actual > 0) {
-        calcular_padres(arbol, indice_actual);
-
-
-        indice_actual = indice_actual / 2;
-    }
-}
 
 void calcular_padres(arbol_v* arbol, int indice){
 
@@ -115,3 +98,30 @@ void calcular_padres(arbol_v* arbol, int indice){
 
 }
 
+void imprimir_arbol(arbol_v* arbol) {
+    if (arbol == NULL || arbol->cantidad_nodos == 0) {
+        printf("El árbol está vacío o no ha sido construido.\n");
+        return;
+    }
+
+    printf("\n--- Estado del Árbol de Validación ---\n");
+    printf("Capacidad total: %d | Nodos en uso: %d\n", arbol->capacidad, arbol->cantidad_nodos);
+    printf("---------------------------------------\n");
+
+    int nodos_en_nivel = 1;
+    int nodos_impresos = 0;
+
+    // Se itera desde la raíz (índice 1) hasta el último nodo en uso.
+    for (int i = 1; i <= arbol->cantidad_nodos; i++) {
+        printf("%d\t", arbol->datos[i]);
+        nodos_impresos++;
+
+        // Si ya se imprimieron todos los nodos del nivel actual, se hace un salto de línea.
+        if (nodos_impresos == nodos_en_nivel) {
+            printf("\n");
+            nodos_en_nivel *= 2; // El siguiente nivel tiene el doble de nodos.
+            nodos_impresos = 0;
+        }
+    }
+    printf("---------------------------------------\n");
+}

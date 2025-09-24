@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 typedef struct _NodoBlock {
   int id_actual;
   char *mensaje;
