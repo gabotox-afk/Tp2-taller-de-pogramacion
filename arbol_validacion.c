@@ -88,9 +88,6 @@ arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas) {
 
 
 void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
-    if (arbol == NULL || id_blockchain < 0 || id_blockchain >= bf -> cantidad_blocks) {
-        return; 
-    }
 
     blockChain* temp = (&bf ->datos[id_blockchain]);
     int nuevo_dato = (temp -> ultimo) -> id_actual;
