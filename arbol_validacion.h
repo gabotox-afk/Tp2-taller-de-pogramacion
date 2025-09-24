@@ -36,9 +36,7 @@ int obtener_valor_raiz(arbol_v* arbol);
  */
 int calcular_valor_subconjunto(arbol_v* arbol, int inicio, int fin);
 
-/**
- * Imprime el estado del árbol simplificado para depuración.
- */
+
 void imprimir_arbol_validacion(arbol_v* arbol);
 
 
