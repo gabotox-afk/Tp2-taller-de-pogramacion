@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 
-arbol_v* crear_arbol_simplificado(int capacidad_inicial) {
+arbol_v* crear_arbol_validacion(int capacidad_inicial) {
     arbol_v* arbol = malloc(sizeof(arbol_v));
     if (arbol == NULL) return NULL;
 
@@ -42,14 +42,14 @@ arbol_v* construir_arbol_validacion(int* ids_hojas, int cantidad_hojas) {
 }
 
 
-void liberar_arbol_simplificado(arbol_v* arbol) {
+void liberar_arbol_validacion(arbol_v* arbol) {
     if (arbol == NULL) return;
     free(arbol->hojas);
     free(arbol);
 }
 
 
-static void recalcular_raiz(arbol_v* arbol) {
+void recalcular_raiz(arbol_v* arbol) {
     arbol->raiz_valor = 1;
     for (int i = 0; i < arbol->cantidad_hojas; i++) {
         arbol->raiz_valor *= arbol->hojas[i];
@@ -118,9 +118,9 @@ arbol_v* construir_arbol_desde_red(_blockFederada* red) {
     return arbol_completo;
 }
 
-void imprimir_arbol_simplificado(arbol_v* arbol) {
+void imprimir_arbol_validacion(arbol_v* arbol) {
     if (arbol == NULL) return;
-    printf("\n--- Árbol Simplificado ---\n");
+    printf("\n--- Árbol validacion ---\n");
     printf("valor de la Raíz: %d\n", arbol->raiz_valor);
     printf("Hojas (%d/%d): [ ", arbol->cantidad_hojas, arbol->capacidad_hojas);
     for (int i = 0; i < arbol->cantidad_hojas; i++) {
