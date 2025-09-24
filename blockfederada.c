@@ -28,3 +28,20 @@ void liberar_red_federada(_blockFederada* red){
     free (red->datos);
     free(red);
 }
+
+blockChain* buscar_blockchain_por_id(_blockFederada* bf, int id){
+    if (bf == NULL ){
+        return NULL;
+    }
+    return &bf -> datos[id];
+}
+
+void agregar_blockchain( _blockFederada* bf, blockChain* bc){
+
+    if (bf -> cantidad_blocks >= bf -> capacidad){
+        modif_len(bf);
+    }
+
+    bf -> datos[bf->cantidad_blocks] = *bc;
+    bf -> cantidad_blocks ++;
+}

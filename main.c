@@ -3,11 +3,17 @@
 #include "generador_primos.h"
 #include "main.h"
 
-void alta(int id_b , _blockFederada* bc ,char* mensaje){
+void alta(int id_b , _blockFederada* bf ,char* mensaje,  int* c,  int* p){
   
+  NodoBlock* nuevo = crear_nodo(mensaje, c, p, (*c)-1);
+
+  blockChain* bc = buscar_blockchain_por_id(bf, id_b);
+
+  
+
 }
 
-void actualizacion(_blockFederada* bc, int id_b, int id_n, char* nm){
+void actualizacion(_blockFederada* bc, int id_b, int id_n, char* nm,  int* c,  int* p){
   
 }
 
