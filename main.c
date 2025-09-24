@@ -1,7 +1,9 @@
 #include "main.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "string.h"
 #include "generador_primos.h"
+#include "arbol_validacion.h"
 
 
 

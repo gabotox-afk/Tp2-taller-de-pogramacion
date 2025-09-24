@@ -9,7 +9,6 @@ typedef struct arbol_v {
     int capacidad_hojas;
 } arbol_v;
 
-arbol_v* crear_arbol_simplificado(int capacidad_inicial);
 
 arbol_v* crear_arbol_validacion(int capacidad_inicial);
 
