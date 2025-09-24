@@ -45,3 +45,26 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc){
     bf -> datos[bf->cantidad_blocks] = *bc;
     bf -> cantidad_blocks ++;
 }
+
+int* extraer_ids_hojas(_blockFederada* red) {
+    int cantidad = red->cantidad_blocks;
+    if (cantidad == 0) {
+        printf("no hay hojas para rellenar el arbol");
+        return NULL;
+    }
+
+    int* arreglo_hojas = malloc(cantidad * sizeof(int));
+
+    for (int i = 0; i < cantidad; i++) {
+        blockChain* cadena_actual = &red->datos[i];
+
+        if (cadena_actual->ultimo != NULL) {
+            arreglo_hojas[i] = cadena_actual->ultimo->id_actual;
+        } else {
+            arreglo_hojas[i] = 1;
+        }
+    }
+
+    return arreglo_hojas;
+}
+
