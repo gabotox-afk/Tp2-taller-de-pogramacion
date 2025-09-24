@@ -1,7 +1,7 @@
 #ifndef arbol_validacion_H
 #define arbol_validacion_H
 #include "blockfederada.h"
-// La estructura que define el nuevo modelo de árbol.
+
 typedef struct arbol_v {
     int raiz_valor;
     int* hojas;
@@ -9,7 +9,7 @@ typedef struct arbol_v {
     int capacidad_hojas;
 } arbol_v;
 
-
+arbol_v* crear_arbol_simplificado(int capacidad_inicial);
 
 arbol_v* crear_arbol_validacion(int capacidad_inicial);
 
@@ -24,6 +24,8 @@ int calcular_valor_subconjunto(arbol_v* arbol, int inicio, int fin);
 
 
 void imprimir_arbol_validacion(arbol_v* arbol);
+
+
 
 
 #endif 
