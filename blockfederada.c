@@ -10,7 +10,7 @@ void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
     int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
 
     int indice_hoja = capacidad_hojas + id_blockchain;
-    arbol->datos[indice_hoja] = nuevo_dato;
+    arbol->hojas[indice_hoja] = nuevo_dato;
 
 
 

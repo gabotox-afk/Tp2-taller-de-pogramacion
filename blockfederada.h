@@ -31,6 +31,8 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc);
 //crea un arreglo con los numeros de las hojas
 int* extraer_ids_hojas(_blockFederada* red);
 
+void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf);
+
 
 #endif
 
