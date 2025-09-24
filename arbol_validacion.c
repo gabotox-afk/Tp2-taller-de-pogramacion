@@ -70,9 +70,6 @@ void actualizar_hoja(arbol_v* arbol, int indice_hoja, int nuevo_valor) {
     recalcular_raiz(arbol);
 }
 
-int obtener_valor_raiz(arbol_v* arbol) {
-    return arbol->raiz_valor;
-}
 
 
 int calcular_valor_subconjunto(arbol_v* arbol, int inicio, int fin) {
