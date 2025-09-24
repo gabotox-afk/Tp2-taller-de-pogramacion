@@ -3,17 +3,34 @@
 #include "generador_primos.h"
 #include "main.h"
 
-void alta(int id_b , _blockFederada* bf ,char* mensaje,  int* c,  int* p){
-  
+void alta(int id_bc , arbol_v* arbol, _blockFederada* bf ,char* mensaje,  int* c, int*cbc,  int* p){
+
   NodoBlock* nuevo = crear_nodo(mensaje, c, p, (*c)-1);
 
-  blockChain* bc = buscar_blockchain_por_id(bf, id_b);
+  if(id_bc >= bf ->cantidad_blocks){
 
+    blockChain* bc = crear_block_chain(cbc);
+    agregar_bloque(bc, nuevo);
+    agregar_blockchain(bf, bc);
+
+    if((arbol->len)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
+      expandir_capacidad(arbol);
+    }
+
+  }
+  else{
+    
+    blockChain* bc = buscar_blockchain_por_id(bf, id_bc);
+    agregar_bloque(bc, nuevo);
+
+    if((arbol->len)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
+      expandir_capacidad(arbol);
+    }
   
-
+  }
 }
 
-void actualizacion(_blockFederada* bc, int id_b, int id_n, char* nm,  int* c,  int* p){
+void actualizacion(_blockFederada* bc, int id_bc, int id_n, char* nm,  int* c,  int* p){
   
 }
 
