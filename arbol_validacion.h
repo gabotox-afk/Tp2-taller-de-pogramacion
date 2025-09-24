@@ -1,5 +1,6 @@
 #ifndef ARBOL_VALIDACION_H
 #define ARBOL_VALIDACION_H
+#include "blockfederada.h"
   
 typedef struct arbol_v {
 int *datos;
@@ -25,7 +26,11 @@ int obtener_indice_hoja(int capacidad_hojas, int indice_blockchain);
 //
 int obtener_indice_padre(int indice_hijo);
 
+//construye el arbol
 arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas);
+
+//modifica y recalcula los nodos internos del arbol
+void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf)
 
 
 #endif

@@ -85,3 +85,32 @@ arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas) {
     arbol->cantidad_nodos = capacidad_total - 1;
     return arbol;
 }
+
+
+void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
+    if (arbol == NULL || id_blockchain < 0 || id_blockchain >= bf -> cantidad_blocks) {
+        return; 
+    }
+
+    blockChain* temp = (&bf ->datos[id_blockchain]);
+    int nuevo_dato = (temp -> ultimo) -> id_actual;
+
+    int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
+
+    int indice_hoja = capacidad_hojas + id_blockchain;
+    arbol->datos[indice_hoja] = nuevo_dato;
+
+
+
+    int indice_actual = indice_hoja / 2;
+
+    while (indice_actual > 0) {
+        int hijo_izq = arbol->datos[2 * indice_actual];
+        int hijo_der = arbol->datos[2 * indice_actual + 1];
+        arbol->datos[indice_actual] = hijo_izq * hijo_der;
+
+
+        indice_actual = indice_actual / 2;
+    }
+}
+
