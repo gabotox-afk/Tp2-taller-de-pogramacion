@@ -13,7 +13,7 @@ void alta(int id_bc , arbol_v* arbol, _blockFederada* bf ,char* mensaje,  int* c
     agregar_bloque(bc, nuevo);
     agregar_blockchain(bf, bc);
 
-    if((arbol->len)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
+    if((arbol->capacidad)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
       expandir_capacidad(arbol);
     }
 
@@ -23,11 +23,14 @@ void alta(int id_bc , arbol_v* arbol, _blockFederada* bf ,char* mensaje,  int* c
     blockChain* bc = buscar_blockchain_por_id(bf, id_bc);
     agregar_bloque(bc, nuevo);
 
-    if((arbol->len)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
+    if((arbol->capacidad)/2 >calcular_capacidad_hojas(bf ->cantidad_blocks)){
       expandir_capacidad(arbol);
     }
   
   }
+
+
+
 }
 
 void actualizacion(_blockFederada* bc, int id_bc, int id_n, char* nm,  int* c,  int* p){

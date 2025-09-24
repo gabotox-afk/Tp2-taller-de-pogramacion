@@ -3,8 +3,8 @@
   
 typedef struct arbol_v {
 int *datos;
-int ultimo;
-int len;
+int cantidad_nodos;
+int capacidad;
 } arbol_v;
 
 //expande la capacidad del arbol
@@ -24,6 +24,8 @@ int obtener_indice_hoja(int capacidad_hojas, int indice_blockchain);
 
 //
 int obtener_indice_padre(int indice_hijo);
+
+arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas);
 
 
 #endif

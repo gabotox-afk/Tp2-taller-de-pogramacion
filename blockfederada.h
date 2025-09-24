@@ -25,6 +25,8 @@ blockChain* buscar_blockchain_por_id(_blockFederada* bf, int id);
 //agrega una blockchain a la blockfederada
 void agregar_blockchain( _blockFederada* bf, blockChain* bc);
 
+//crea un arreglo con los numeros de las hojas
+int* extraer_ids_hojas(_blockFederada* red);
 
 #endif
 
