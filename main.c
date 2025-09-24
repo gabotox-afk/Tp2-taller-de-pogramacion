@@ -14,43 +14,12 @@
  */
 void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* contador_primos, int primos[]) {
 
-    int indice_real_modificado;
 
-    if (id_bc < 0) {
-        printf("Error: El índice no puede ser negativo.\n");
-        return;
-    } 
-    else if (id_bc >= red->cantidad_blocks) {
-
-        printf("Índice %d fuera de rango. Creando una nueva blockchain al final (en el índice %d).\n", id_bc, red->cantidad_blocks);
-        blockChain* bc = crear_block_chain(contador_primos);
-        agregar_blockchain(red, bc);
-
-        indice_real_modificado = red->cantidad_blocks - 1;
-    } 
-    else {
-        indice_real_modificado = id_bc;
-    }
-
-    blockChain* bc_destino = &red->datos[indice_real_modificado];
-    int id_anterior = (bc_destino->ultimo == NULL) ? 0 : bc_destino->ultimo->id_actual;
-    int nuevo_id = primos[*contador_primos];
-    (*contador_primos)++;
-
-    NodoBlock* nuevo_nodo = crear_nodo(mensaje, contador_primos, primos, id_anterior);
-    if (nuevo_nodo == NULL) return; // Manejo de error básico
-
-    agregar_bloque(bc_destino, nuevo_nodo);
-
-
-    modificar_arbol(arbol, indice_real_modificado, red);
-    
-    printf("Nodo con ID %d agregado a la blockchain %d.\n", nuevo_id, indice_real_modificado);
 }
 
 
 
-void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  int* p){
+void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  int* p, arbol_v* arbol){
 
     blockChain* hola = buscar_blockchain_por_id(bf, id_bc);
 
@@ -73,6 +42,8 @@ void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  
       (*c)++;
       temp = temp -> sig;
     }
+
+    actualizar_hoja(arbol, id_bc, (hola -> ultimo) -> id_actual);
   
 }
 
