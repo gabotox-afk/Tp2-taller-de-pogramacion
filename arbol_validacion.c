@@ -62,7 +62,7 @@ arbol_v* construir_arbol(int* ids_hojas, int cantidad_hojas) {
 
     int capacidad_hojas = calcular_capacidad_hojas(cantidad_hojas);
     int capacidad_total = capacidad_hojas * 2;
-    arbol_v* arbol = crear_arbol_vacio(capacidad_total);
+    arbol_v* arbol = crear_arbol_validacion(capacidad_total);
     if (arbol == NULL) return NULL;
 
 
