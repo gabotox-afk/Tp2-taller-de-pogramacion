@@ -6,39 +6,24 @@
 #include "arbol_validacion.h"
 
 
-
-/**
- * Agrega un nodo a la red. Si el índice 'id_bc' es válido, se usa.
- * Si está fuera de rango, se crea una única blockchain nueva al final
- * y se agrega el nodo ahí.
- */
 void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* contador_primos, int* contador_bc, int* primos) {
   
 
-  printf("\n\nADENTRO DE ALTA\n\n");
   if(id_bc >= red ->cantidad_blocks){
     
-  printf("\n\nADENRTRO DEL IF\n\n");
     id_bc = red -> cantidad_blocks;
     NodoBlock* nuevo = crear_nodo(mensaje, contador_primos,primos, 0);
 
     blockChain* block= crear_block_chain(contador_bc);
     agregar_blockchain(red,block);
     agregar_bloque(block, nuevo);
-    
-  printf("\n\nDESPUES DE AGREGAR BLOCK\n\n");
-    red-> cantidad_blocks ++;
-
+  
     liberar_arbol_validacion(red ->arbol_validacion);
     
   
-
-    red -> arbol_validacion = construir_arbol_desde_red(red);
-        
-  
-
-    // actualizar_hoja(arbol, id_bc, (block -> ultimo) -> id_actual);
-    printf("holaholahola");
+    
+    int *ids_hojas = extraer_ids_hojas(red);
+    red -> arbol_validacion = construir_arbol_validacion(ids_hojas, red -> cantidad_blocks);
 
     return;
   }
@@ -178,7 +163,7 @@ int main() {
   
   printf("\n\nJUSTO ANTES DE ALTA\n\n");
 
-  // alta(4 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p); NO FUNCIONA
+  alta(4 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p); 
 
   //VALIDACION VERIFICADO
 
@@ -192,9 +177,11 @@ int main() {
 
   imprimir_arbol_validacion(bf -> arbol_validacion);
 
-  
 
   liberar_lista(bc1);
+
+  free(p);
+
 
 
   return 0;

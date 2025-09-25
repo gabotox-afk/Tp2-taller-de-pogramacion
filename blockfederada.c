@@ -36,8 +36,6 @@ arbol_v* construir_arbol_desde_red(_blockFederada* red) {
 
     arbol_v* arbol_completo = construir_arbol_validacion(ids_hojas, red->cantidad_blocks);
 
-    free(ids_hojas);
-
     return arbol_completo;
 }
 
@@ -89,16 +87,23 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc){
 }
 
 int* extraer_ids_hojas(_blockFederada* red) {
+
+    
     int cantidad = red->cantidad_blocks;
     if (cantidad == 0) {
         printf("no hay hojas para rellenar el arbol");
         return NULL;
     }
 
-    int* arreglo_hojas = malloc(cantidad * sizeof(int));
+    
 
-    for (int i = 0; i < cantidad; i++) {
+    int* arreglo_hojas = malloc(cantidad * sizeof(int));
+    
+
+    for (int i = 0; i < cantidad; i++) {        
         blockChain* cadena_actual = red->datos[i];
+
+
 
         if (cadena_actual->ultimo != NULL) {
             arreglo_hojas[i] = cadena_actual->ultimo->id_actual;
@@ -106,6 +111,9 @@ int* extraer_ids_hojas(_blockFederada* red) {
             arreglo_hojas[i] = 1;
         }
     }
+        printf("\n\n\n justo despues de if\n\n\n");
+
+    
 
     return arreglo_hojas;
 }
