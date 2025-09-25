@@ -1,17 +1,17 @@
 #ifndef BLOCKFEDERADA_H
 #define BLOCKFEDERADA_H
 #include "blockchain.h"
-#include "arbol_validacion.h"
 
-
-
+typedef struct arbol_v arbol_v;
 
 typedef struct _BlockFederada {
-blockChain *datos;
+blockChain **datos;
 int capacidad;
 int cantidad_blocks;
 arbol_v* arbol_validacion;
 }_blockFederada;
+
+
 
 //expande la capacidad de la blockfederada
 void modif_len(_blockFederada* bF);
@@ -31,7 +31,7 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc);
 //crea un arreglo con los numeros de las hojas
 int* extraer_ids_hojas(_blockFederada* red);
 
-void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf);
+// void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf);
 
 
 #endif

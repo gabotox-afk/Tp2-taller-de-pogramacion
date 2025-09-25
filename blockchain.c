@@ -7,7 +7,7 @@ NodoBlock* crear_nodo(char* m, int* c, int* p, int id_ant){
         nuevo -> id_anterior= 0;    
     }
     else{
-        nuevo -> id_anterior= p[id_ant];
+        nuevo -> id_anterior= id_ant;
     }
 
     nuevo -> mensaje= m;

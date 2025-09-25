@@ -2,31 +2,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
+// void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
 
-    blockChain* temp = (&bf ->datos[id_blockchain]);
-    int nuevo_dato = (temp -> ultimo) -> id_actual;
+//     blockChain* temp = (&bf ->datos[id_blockchain]);
+//     int nuevo_dato = (temp -> ultimo) -> id_actual;
 
-    int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
+//     int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
 
-    int indice_hoja = capacidad_hojas + id_blockchain;
-    arbol->hojas[indice_hoja] = nuevo_dato;
+//     int indice_hoja = capacidad_hojas + id_blockchain;
+//     arbol->hojas[indice_hoja] = nuevo_dato;
 
 
 
-    int indice_actual = indice_hoja / 2;
+//     int indice_actual = indice_hoja / 2;
 
-    while (indice_actual > 0) {
-        calcular_padres(arbol, indice_actual);
-        indice_actual = indice_actual / 2;
-    }
-}
+//     while (indice_actual > 0) {
+//         calcular_padres(arbol, indice_actual);
+//         indice_actual = indice_actual / 2;
+//     }
+// }
 
 
 void modif_len(_blockFederada* red) {
 
     int nueva_capacidad = red->capacidad + 1;
-    blockChain* nuevos_datos = realloc(red->datos, nueva_capacidad * sizeof(blockChain));
+
+    blockChain** nuevos_datos = realloc(red->datos, nueva_capacidad * sizeof(blockChain));
+
     red->datos = nuevos_datos;
     red->capacidad = nueva_capacidad;
 }
@@ -44,7 +46,7 @@ void liberar_red_federada(_blockFederada* red){
     if(!red) return;
 
     for (int i = 0; i < red->cantidad_blocks; i++) {    
-        liberar_lista(&red->datos[i]);
+        liberar_lista(red->datos[i]);
     }
 
     free (red->datos);
@@ -55,7 +57,7 @@ blockChain* buscar_blockchain_por_id(_blockFederada* bf, int id){
     if (bf == NULL ){
         return NULL;
     }
-    return &bf -> datos[id];
+    return bf -> datos[id];
 }
 
 void agregar_blockchain( _blockFederada* bf, blockChain* bc){
@@ -64,7 +66,7 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc){
         modif_len(bf);
     }
 
-    bf -> datos[bf->cantidad_blocks] = *bc;
+    bf -> datos[bf->cantidad_blocks] = bc;
     bf -> cantidad_blocks ++;
 }
 
@@ -78,7 +80,7 @@ int* extraer_ids_hojas(_blockFederada* red) {
     int* arreglo_hojas = malloc(cantidad * sizeof(int));
 
     for (int i = 0; i < cantidad; i++) {
-        blockChain* cadena_actual = &red->datos[i];
+        blockChain* cadena_actual = red->datos[i];
 
         if (cadena_actual->ultimo != NULL) {
             arreglo_hojas[i] = cadena_actual->ultimo->id_actual;

@@ -1,6 +1,8 @@
 #ifndef arbol_validacion_H
 #define arbol_validacion_H
-#include "blockfederada.h"
+
+
+typedef struct _BlockFederada _blockFederada;
 
 typedef struct arbol_v {
     int raiz_valor;
