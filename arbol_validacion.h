@@ -2,8 +2,6 @@
 #define arbol_validacion_H
 
 
-typedef struct _BlockFederada _blockFederada;
-
 typedef struct arbol_v {
     int raiz_valor;
     int* hojas;
@@ -29,7 +27,6 @@ void recalcular_raiz(arbol_v* arbol);
 
 void imprimir_arbol_validacion(arbol_v* arbol);
 
-arbol_v* construir_arbol_desde_red(_blockFederada* red);
 
 
 

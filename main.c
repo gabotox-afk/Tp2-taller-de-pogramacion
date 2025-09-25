@@ -15,19 +15,27 @@
 void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* contador_primos, int* contador_bc, int* primos) {
   
 
+  printf("\n\nADENTRO DE ALTA\n\n");
   if(id_bc >= red ->cantidad_blocks){
+    
+  printf("\n\nADENRTRO DEL IF\n\n");
     id_bc = red -> cantidad_blocks;
     NodoBlock* nuevo = crear_nodo(mensaje, contador_primos,primos, 0);
 
     blockChain* block= crear_block_chain(contador_bc);
     agregar_blockchain(red,block);
-
+    agregar_bloque(block, nuevo);
+    
+  printf("\n\nDESPUES DE AGREGAR BLOCK\n\n");
     red-> cantidad_blocks ++;
 
     liberar_arbol_validacion(red ->arbol_validacion);
+    
+  
 
     red -> arbol_validacion = construir_arbol_desde_red(red);
         
+  
 
     // actualizar_hoja(arbol, id_bc, (block -> ultimo) -> id_actual);
     printf("holaholahola");
@@ -87,12 +95,29 @@ void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  
   
 }
 
-int validacion(_blockFederada* bf){
+int validacion(_blockFederada* bf, arbol_v* arbol){
+
+  int prop_heap = 0;
+  int prop_raiz = 0;
+
+  for(int i = 0; arbol -> raiz_valor > arbol -> hojas[i] && i < bf -> cantidad_blocks; i++){
+    if(i == bf -> cantidad_blocks -1) prop_heap += 1;
+  }
   
+  int multiplicacion = 1;
+  
+  for(int i = 0; i< bf -> cantidad_blocks; i ++)
+    multiplicacion *= arbol ->hojas[i];
+
+   return (multiplicacion == arbol -> raiz_valor && prop_heap);
+
 }
 
-int validacion_sub(int vp, int min, int max, _blockFederada bf){
+int validacion_sub(int vp, int min, int max, arbol_v *arbol){
   
+  int valor_subconjunto = calcular_valor_subconjunto(arbol,min,max );
+
+  return (vp == valor_subconjunto);
 }
 
 
@@ -110,7 +135,7 @@ int main() {
   // Uso los números primos
 
   // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
-  free(p);
+ 
 
   blockChain*bc1= crear_block_chain(&contadorbc);
   blockChain*bc2= crear_block_chain(&contadorbc);
@@ -150,12 +175,20 @@ int main() {
 
   imprimir_arbol_validacion(bf ->arbol_validacion);
 
-  // alta(2 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p);
+  
+  printf("\n\nJUSTO ANTES DE ALTA\n\n");
 
-  actualizacion(bf, 0,3, "papota",&contadorp,p,bf ->arbol_validacion );
+  // alta(4 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p); NO FUNCIONA
+
+  //VALIDACION VERIFICADO
+
+  //VALIDACION SUBCONJUNTO VERIFICADO
+
+
+  // actualizacion(bf, 0,3, "papota",&contadorp,p,bf ->arbol_validacion ); VERIFICADO
+
+
   imprimir_lista(bc1);
-
-
 
   imprimir_arbol_validacion(bf -> arbol_validacion);
 

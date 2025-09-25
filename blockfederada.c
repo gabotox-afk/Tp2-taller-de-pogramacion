@@ -22,6 +22,24 @@
 //     }
 // }
 
+arbol_v* construir_arbol_desde_red(_blockFederada* red) {
+
+    if (red == NULL || red->cantidad_blocks == 0) {
+        return NULL;
+    }
+
+    int* ids_hojas = extraer_ids_hojas(red);
+
+    if (ids_hojas == NULL) {
+        return NULL; 
+    }
+
+    arbol_v* arbol_completo = construir_arbol_validacion(ids_hojas, red->cantidad_blocks);
+
+    free(ids_hojas);
+
+    return arbol_completo;
+}
 
 void modif_len(_blockFederada* red) {
 

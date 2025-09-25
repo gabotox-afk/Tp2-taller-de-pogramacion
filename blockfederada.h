@@ -1,8 +1,8 @@
 #ifndef BLOCKFEDERADA_H
 #define BLOCKFEDERADA_H
 #include "blockchain.h"
+#include "arbol_validacion.h"
 
-typedef struct arbol_v arbol_v;
 
 typedef struct _BlockFederada {
 blockChain **datos;
@@ -31,8 +31,7 @@ void agregar_blockchain( _blockFederada* bf, blockChain* bc);
 //crea un arreglo con los numeros de las hojas
 int* extraer_ids_hojas(_blockFederada* red);
 
-// void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf);
-
+arbol_v* construir_arbol_desde_red(_blockFederada* red);
 
 #endif
 
