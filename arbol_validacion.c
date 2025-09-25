@@ -42,25 +42,7 @@ arbol_v* construir_arbol_validacion(int* ids_hojas, int cantidad_hojas) {
     return arbol;
 }
 
-arbol_v* crear_arbol_validacion(int capacidad_inicial) {
-    arbol_v* arbol = malloc(sizeof(arbol_v));
-    if (arbol == NULL) return NULL;
 
-    arbol->raiz_valor = 1;
-    arbol->cantidad_hojas = 0;
-    arbol->capacidad_hojas = capacidad_inicial;
-    
-    if (capacidad_inicial > 0) {
-        arbol->hojas = malloc(capacidad_inicial * sizeof(int));
-        if (arbol->hojas == NULL) {
-            free(arbol);
-            return NULL;
-        }
-    } else {
-        arbol->hojas = NULL;
-    }
-    return arbol;
-}
 
 
 void liberar_arbol_validacion(arbol_v* arbol) {

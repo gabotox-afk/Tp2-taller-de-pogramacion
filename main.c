@@ -150,9 +150,10 @@ int main() {
 
   imprimir_arbol_validacion(bf ->arbol_validacion);
 
-  alta(2 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p);
+  // alta(2 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p);
 
-  imprimir_lista(bc2);
+  actualizacion(bf, 0,3, "papota",&contadorp,p,bf ->arbol_validacion );
+  imprimir_lista(bc1);
 
 
 
