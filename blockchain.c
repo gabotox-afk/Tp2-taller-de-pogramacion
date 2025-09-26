@@ -10,7 +10,8 @@ NodoBlock* crear_nodo(char* m, int* c, int* p, int id_ant){
         nuevo -> id_anterior= id_ant;
     }
 
-    nuevo -> mensaje= m;
+    nuevo -> mensaje= malloc(strlen(m) + 1);
+    strcpy(nuevo -> mensaje, m);
     nuevo -> sig= NULL;
 
     (*c)++;

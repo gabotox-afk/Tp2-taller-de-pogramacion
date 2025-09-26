@@ -2,25 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// void modificar_arbol(arbol_v* arbol, int id_blockchain, _blockFederada* bf) {
-
-//     blockChain* temp = (&bf ->datos[id_blockchain]);
-//     int nuevo_dato = (temp -> ultimo) -> id_actual;
-
-//     int capacidad_hojas = calcular_capacidad_hojas(bf -> cantidad_blocks);
-
-//     int indice_hoja = capacidad_hojas + id_blockchain;
-//     arbol->hojas[indice_hoja] = nuevo_dato;
-
-
-
-//     int indice_actual = indice_hoja / 2;
-
-//     while (indice_actual > 0) {
-//         calcular_padres(arbol, indice_actual);
-//         indice_actual = indice_actual / 2;
-//     }
-// }
 
 arbol_v* construir_arbol_desde_red(_blockFederada* red) {
 
@@ -36,23 +17,34 @@ arbol_v* construir_arbol_desde_red(_blockFederada* red) {
 
     arbol_v* arbol_completo = construir_arbol_validacion(ids_hojas, red->cantidad_blocks);
 
+    free(ids_hojas);
+
     return arbol_completo;
 }
 
 void modif_len(_blockFederada* red) {
+    int nueva_capacidad = (red->capacidad == 0) ? 2 : red->capacidad * 2;
 
-    int nueva_capacidad = red->capacidad + 1;
-
-    blockChain** nuevos_datos = realloc(red->datos, nueva_capacidad * sizeof(blockChain));
-
-    red->datos = nuevos_datos;
+    // --- CORRECCIÓN DE SIZEOF, USO DE TEMPORAL Y VERIFICACIÓN ---
+    blockChain** temp = realloc(red->datos, nueva_capacidad * sizeof(blockChain*));
+    if (temp == NULL) {
+        perror("FATAL: No se pudo expandir la red federada");
+        exit(EXIT_FAILURE);
+    }
+    
+    red->datos = temp;
     red->capacidad = nueva_capacidad;
 }
-
 _blockFederada* crear_red_federada(int largo_inicial){
     _blockFederada *nuevo = (_blockFederada*) malloc(sizeof(_blockFederada));
+
+    if (nuevo == NULL) {
+        perror("Fallo al crear la red federada");
+        return NULL;
+    }
+
     nuevo -> capacidad = largo_inicial;
-    nuevo -> datos = malloc (largo_inicial*sizeof(blockChain));
+    nuevo -> datos = malloc (largo_inicial*sizeof(blockChain*));
     nuevo -> cantidad_blocks = 0;
     nuevo -> arbol_validacion = NULL;
     return nuevo;
@@ -65,6 +57,7 @@ void liberar_red_federada(_blockFederada* red){
         liberar_lista(red->datos[i]);
     }
 
+    liberar_arbol_validacion(red -> arbol_validacion);
     free (red->datos);
     free(red);
 }

@@ -6,24 +6,25 @@
 #include "arbol_validacion.h"
 
 
-void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* contador_primos, int* contador_bc, int* primos) {
+void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* contadorp, int* contadorbc, int* primos) {
   
 
   if(id_bc >= red ->cantidad_blocks){
     
     id_bc = red -> cantidad_blocks;
-    NodoBlock* nuevo = crear_nodo(mensaje, contador_primos,primos, 0);
+    NodoBlock* nuevo = crear_nodo(mensaje, contadorp,primos, 0);
 
-    blockChain* block= crear_block_chain(contador_bc);
+    blockChain* block= crear_block_chain(contadorbc);
     agregar_blockchain(red,block);
     agregar_bloque(block, nuevo);
   
     liberar_arbol_validacion(red ->arbol_validacion);
     
   
-    
     int *ids_hojas = extraer_ids_hojas(red);
     red -> arbol_validacion = construir_arbol_validacion(ids_hojas, red -> cantidad_blocks);
+
+    free(ids_hojas);
 
     return;
   }
@@ -39,7 +40,7 @@ void alta(int id_bc, _blockFederada* red, arbol_v* arbol, char* mensaje, int* co
     id_ant = 0;
   }
 
-  NodoBlock* nuevo = crear_nodo(mensaje, contador_primos,primos, id_ant );
+  NodoBlock* nuevo = crear_nodo(mensaje, contadorp,primos, id_ant );
 
   agregar_bloque(block, nuevo);
 
@@ -59,11 +60,12 @@ void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  
   NodoBlock* temp = buscar_nodo_por_id(hola, id_n);
 
   temp->id_actual = p[(*c)];
+
+ printf("\n\n\n%s\n\n\n",temp -> mensaje );
     
   free(temp->mensaje);
   temp->mensaje = (char*)malloc(strlen(nm) + 1); 
   strcpy(temp->mensaje, nm);
-  temp->mensaje = nm;
 
   (*c)++;
   temp = temp->sig;
@@ -71,10 +73,14 @@ void actualizacion(_blockFederada* bf, int id_bc, int id_n, char* nm,  int* c,  
   while(temp){
     temp->id_actual = p[(*c)];
     temp-> id_anterior = p [ (*c)-1];
-    temp->mensaje = nm;
+    free(temp ->mensaje);
+    temp ->mensaje = malloc(strlen(nm) + 1);
+    strcpy(temp -> mensaje, nm);
     (*c)++;
     temp = temp -> sig;
   }
+
+ 
 
   actualizar_hoja(arbol, id_bc, (hola -> ultimo) -> id_actual);
   
@@ -85,7 +91,7 @@ int validacion(_blockFederada* bf, arbol_v* arbol){
   int prop_heap = 0;
   int prop_raiz = 0;
 
-  for(int i = 0; arbol -> raiz_valor > arbol -> hojas[i] && i < bf -> cantidad_blocks; i++){
+  for(int i = 0;i < bf -> cantidad_blocks &&  arbol -> raiz_valor > arbol -> hojas[i]; i++){
     if(i == bf -> cantidad_blocks -1) prop_heap += 1;
   }
   
@@ -108,6 +114,9 @@ int validacion_sub(int vp, int min, int max, arbol_v *arbol){
 
 
 
+
+
+
 int main() {
   int contadorp = 0 ;
   int contadorbc = 0;
@@ -119,70 +128,58 @@ int main() {
 
   // Uso los números primos
 
-  // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
  
 
-  blockChain*bc1= crear_block_chain(&contadorbc);
-  blockChain*bc2= crear_block_chain(&contadorbc);
-
-
-  NodoBlock* n1 = crear_nodo("hola",&contadorp, p,0);
-  NodoBlock* n2 = crear_nodo("como",&contadorp, p,2);
-  NodoBlock* n3 = crear_nodo("adios",&contadorp, p,3);
-  NodoBlock* n4 = crear_nodo("adioooooos",&contadorp, p,5);
-  NodoBlock* n5 = crear_nodo("papotes",&contadorp,p,0 );
-  agregar_bloque(bc1, n1);
-  agregar_bloque(bc1, n2);
-  agregar_bloque(bc1, n3);
-  agregar_bloque(bc1, n4);
-
-  imprimir_lista (bc1);
-  
-
- 
-
-  _blockFederada* bf = crear_red_federada(2);
-  agregar_blockchain(bf, bc1);
-  agregar_blockchain(bf, bc2);
-
-  agregar_bloque(bc2,n5 );
-
-  imprimir_lista (bc2);
- 
-   
-  bf -> arbol_validacion = crear_arbol_validacion(bf -> cantidad_blocks);
-
-  int *prueba = extraer_ids_hojas(bf);
-
-  for (int i = 0; i < bf -> cantidad_blocks; i++)printf("%d",prueba[i]);
-
-  bf -> arbol_validacion = construir_arbol_desde_red(bf);
-
-  imprimir_arbol_validacion(bf ->arbol_validacion);
+ _blockFederada* bf = crear_red_federada(2);
+  bf->arbol_validacion = crear_arbol_validacion(2);
+  printf("Sistema listo.\n\n");
 
   
-  printf("\n\nJUSTO ANTES DE ALTA\n\n");
+  printf("\n================ ALTA ================\n");
+  printf("\n Agrego nodo a blockchain 0 (nueva)\n");
+  alta(0, bf, bf -> arbol_validacion, "profe", &contadorp, &contadorbc, p);
+  imprimir_arbol_validacion(bf->arbol_validacion);
+  printf("\n Agrego nodo a blockchain 1 (nueva)\n");
+  alta(1, bf,bf ->arbol_validacion, "perdiste", &contadorp, &contadorbc, p);
+  imprimir_arbol_validacion(bf->arbol_validacion);
+  printf("\n Agrego otro nodo a la blockchain 0\n");
+  alta(0, bf, bf -> arbol_validacion, "el", &contadorp, &contadorbc, p);
+  printf("\n Agrego blockchain 3(fuera de la capacidad inicial)");
+  alta(3, bf, bf -> arbol_validacion, "juego", &contadorp, &contadorbc, p);
+  imprimir_arbol_validacion(bf->arbol_validacion);
 
-  alta(4 , bf, bf -> arbol_validacion,"gigachad" ,&contadorp, &contadorbc, p); 
+  printf("\n================ ACTUALIZACIÓN ================\n");
+  printf("\n Imprimo blockchain 0 antes de la actualización:\n");
+  imprimir_lista(bf->datos[0]);
+  
+  printf("\n Actualizo nodo con ID 2 en blockchain 0\n");
+  actualizacion(bf, 0, 2, "mensaje modificado", &contadorp, p, bf -> arbol_validacion);
+  
+  printf("\n Estado de la blockchain 0 despues de la actualización:\n");
+  imprimir_lista(bf->datos[0]);
+  printf("\n Árbol DESPUÉS de la actualización:\n");
+  imprimir_arbol_validacion(bf->arbol_validacion);
 
-  //VALIDACION VERIFICADO
+  printf("\n================ VALIDACIÓN ================\n");
+  printf(" Realizando validación total de la red ");
+  printf("Resultado: %s\n", validacion(bf, bf ->arbol_validacion) ? "VÁLIDA" : "INVÁLIDA");
+  printf("\n Validando subconjunto {0, 1} con valor esperado 39 (13*3) ");
+  printf("Resultado: %s\n", validacion_sub(39, 0, 1, bf -> arbol_validacion) ? "CORRECTO" : "INCORRECTO");
 
-  //VALIDACION SUBCONJUNTO VERIFICADO
+  printf("\n Valido subconjunto {0, 1} con valor esperado 99, ");
+  printf("Resultado: %s\n", validacion_sub(99, 0, 1, bf -> arbol_validacion) ? "CORRECTO" : "INCORRECTO");
 
+  printf("\nCambio manualmente el valor de la raiz a una incorrecta (0)");
+  bf -> arbol_validacion -> raiz_valor = 0;
+  printf("\nValido la red, ");
+  printf("Resultado: %s\n", validacion(bf, bf ->arbol_validacion) ? "VÁLIDA" : "INVÁLIDA");
+  
+  printf("\n================ Libero toda la memoria ================\n");
 
-  // actualizacion(bf, 0,3, "papota",&contadorp,p,bf ->arbol_validacion ); VERIFICADO
-
-
-  imprimir_lista(bc1);
-
-  imprimir_arbol_validacion(bf -> arbol_validacion);
-
-
-  liberar_lista(bc1);
-
+  liberar_red_federada(bf);
   free(p);
-
-
+  printf("Toda la memoria ha sido liberada.\n");
+  // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
 
   return 0;
 }

@@ -62,9 +62,7 @@ void recalcular_raiz(arbol_v* arbol) {
 void aumentar_capacidad(arbol_v* arbol, int indice_requerido) {   
 
     int nueva_capacidad = arbol -> capacidad_hojas + 1;
-    if (nueva_capacidad <= indice_requerido) {
-        nueva_capacidad = indice_requerido + 1;
-    }
+    
 
     int* temp = realloc(arbol->hojas, nueva_capacidad * sizeof(int));
 
