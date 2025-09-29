@@ -33,7 +33,7 @@ void imprimir_arbol_validacion(arbol_v* arbol);
 //aumenta la capacidad del arbol de validacion
 void aumentar_capacidad(arbol_v* arbol, int indice_requerido);
 
-
+//67
 
 
 #endif 

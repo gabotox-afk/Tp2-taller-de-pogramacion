@@ -177,9 +177,11 @@ int main() {
   printf("\n================ Libero toda la memoria ================\n");
 
   liberar_red_federada(bf);
+
+  // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
   free(p);
   printf("Toda la memoria ha sido liberada.\n");
-  // IMPORTANTE: libero la memoria pedida para el arreglo de números primos
+  
 
   return 0;
 }
